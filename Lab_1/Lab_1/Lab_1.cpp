@@ -30,7 +30,35 @@ public:
 		}
 		delete first;
 	}
-
+	void chooseSorting(int item, int oper) {
+		switch (oper) {
+		case 1:
+			ascendingOrd(item);
+			break;
+		case 2:
+			descendingOrd(item);
+			break;
+		}
+	}
+	void ascendingOrd(int item) {
+		Node* following = first;
+		Node* previous = NULL;
+		while (following->next != NULL && following->data <= item) {
+			previous = following;
+			following = following->next;
+		}
+		addItem(previous, following, item);//method of adding item to the list
+	}
+	void descendingOrd(int item) {
+		Node* following = first;
+		Node* previous = NULL;
+		while (following->next != NULL && following->data > item) {
+			previous = following;
+			following = following->next;
+		}
+		addItem(previous, following, item);//method of adding item to the list
+	}
+	void addItem(Node* previous, Node* following, int item);
 };
 int main()
 {
