@@ -8,9 +8,29 @@ struct Node {
 	int data;
 	Node* next;
 	Node() {
-
+		next = NULL;
 	}
-	Node( int x, Node* link)
+	Node(int x, Node* link = NULL) {
+		data = x;
+		next = link;
+	}
+};
+class List {
+private:
+	Node* first;
+	int count;
+public:
+	List() { first = NULL; count = 0; }
+	~List() {
+		Node* temporary = new Node();
+		while (first != NULL) {
+			temporary = first;
+			first = first->next;
+			delete temporary;
+		}
+		delete first;
+	}
+
 };
 int main()
 {
