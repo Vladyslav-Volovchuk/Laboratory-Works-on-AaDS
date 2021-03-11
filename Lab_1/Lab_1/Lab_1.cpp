@@ -59,7 +59,7 @@ public:
 		addItem(previous, following, item);//method of adding item to the list
 	}
 	void addItem(Node* previous, Node* following, int item) {//adding item after defined method of sorting
-		if (previous = NULL) {
+		if (previous == NULL) {
 			first = new Node(item, first);
 		}
 		else
@@ -77,14 +77,21 @@ public:
 };
 int main()
 {
+	List A;
 	int size;
+	
 	cout << "Enter the size of a list:\n";
 	cin >> size;
 	cout << "\n\nChoose the way of sorting your items:\n\n1 - in ascending order;\n2 - in descending order.\nEnter the number of operation: ";
+	int oper;
+	cin >> oper;
+	cout << "\nBegin inputting the items now:\n";	
 	for (int i = 0; i < size; i++) {
-		//adding item;
-		//sorting item by the number of operation;
+		int item;
+		cin >> item;
+		A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
 	}
+	A.printList();
 	cout << "\n\n" << size << "- List is Full!! Choose the operations among ones mentioned below:\n";
 	cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item";//first version
 }
