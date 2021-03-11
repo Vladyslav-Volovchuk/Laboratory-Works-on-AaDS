@@ -58,7 +58,22 @@ public:
 		}
 		addItem(previous, following, item);//method of adding item to the list
 	}
-	void addItem(Node* previous, Node* following, int item);
+	void addItem(Node* previous, Node* following, int item) {//adding item after defined method of sorting
+		if (previous = NULL) {
+			first = new Node(item, first);
+		}
+		else
+			previous = new Node(item, following);
+		count++;
+	}
+	void printList() {//the operation of printing the whole list sorted
+		cout << "\n\nThe content of the List is:\n";
+		Node* i = first;
+		while (i != NULL) {
+			cout << i->data << " ";
+			i = i->next;
+		}
+	}
 };
 int main()
 {
