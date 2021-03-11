@@ -43,7 +43,7 @@ public:
 	void ascendingOrd(int item) {
 		Node* following = first;
 		Node* previous = NULL;
-		while (following->next != NULL && following->data <= item) {
+		while (following != NULL && following->data <= item) {
 			previous = following;
 			following = following->next;
 		}
@@ -52,7 +52,7 @@ public:
 	void descendingOrd(int item) {
 		Node* following = first;
 		Node* previous = NULL;
-		while (following->next != NULL && following->data > item) {
+		while (following != NULL && following->data > item) {
 			previous = following;
 			following = following->next;
 		}
