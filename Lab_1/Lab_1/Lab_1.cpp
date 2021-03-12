@@ -111,6 +111,14 @@ public:
 		if (result == size) { cout << result << " - List is full!!\n" << endl; return res; }
 		else { res = false; return res; }
 	}
+	bool isEmpty() {
+		bool result = true;
+		if (count == 0) {
+			cout << "\nList is empty!\n";
+			return result;
+		}
+		else { cout << "\nList is not empty!\n"; result = false; return result; }
+	}
 
 };
 int main()
