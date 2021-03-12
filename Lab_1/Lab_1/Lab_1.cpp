@@ -100,6 +100,16 @@ public:
 			}
 		}
 	}
+	void isFull(int size) {
+		int result = 1;
+		Node* firstNode = first;
+		while (result < size) {
+			firstNode = firstNode->next;
+			result++;
+		}
+		if (result == size){ cout << result << " - List is full!!\n" << endl; }
+	}
+
 };
 int main()
 {
