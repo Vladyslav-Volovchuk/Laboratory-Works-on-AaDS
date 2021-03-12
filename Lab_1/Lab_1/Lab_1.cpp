@@ -63,7 +63,7 @@ public:
 			first = new Node(item, first);
 		}
 		else
-			previous = new Node(item, following);
+			previous->next = new Node(item, following);
 		count++;
 	}
 	void printList() {//the operation of printing the whole list sorted
@@ -72,6 +72,32 @@ public:
 		while (i != NULL) {
 			cout << i->data << " ";
 			i = i->next;
+		}
+	}
+	bool searchForItem(int item) {
+		bool found = false;
+		Node* needed = first;
+		while (needed->next != NULL && needed->data != item) {
+			needed = needed->next;
+		}
+		if (needed->next == NULL && needed->data != item) { cout << "\nThe item has not been found\n"; return found; }
+		else { cout << "\nThe item has been found\n"; found = true; return found; }
+
+	}
+	void deleteItem(int item) {
+		while(searchForItem(item)){
+			Node* needed = first;
+			Node* previous = NULL;
+			while (needed->data != item && needed->next != NULL) {
+				previous = needed;
+				needed = needed->next;
+			}
+			if (needed->data != item && needed->next == NULL) {
+				cout << "Needed item has not been found in the list. Try another operation\n\n\n";
+			}
+			else {
+				previous->next = needed->next;
+			}
 		}
 	}
 };
@@ -91,7 +117,25 @@ int main()
 		cin >> item;
 		A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
 	}
-	A.printList();
 	cout << "\n\n" << size << "- List is Full!! Choose the operations among ones mentioned below:\n";
-	cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item";//first version
+	int operation;
+	cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)\n";
+	cin >> operation;
+	//first version of operations
+	switch (operation) {
+	case 1:
+		A.printList();
+		break;
+	case 2:
+		cout << "\nInput the item that you want to search for:\n";
+		int s;
+		cin >> s;
+		A.searchForItem(s);
+		break;
+		//case
+	}
+	
+	
+	
+	
 }
