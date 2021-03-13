@@ -119,7 +119,14 @@ public:
 		}
 		else { cout << "\nList is not empty!\n"; result = false; return result; }
 	}
-
+	void makeEmpty() {
+		Node* temporary = new Node();
+		while (first != NULL) {
+			temporary = first;
+			first = first->next;
+			delete temporary;
+		}
+	}
 };
 int main()
 {
