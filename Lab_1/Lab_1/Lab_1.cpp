@@ -121,12 +121,14 @@ public:
 		else { cout << "\nList is not empty!\n"; result = false; return result; }
 	}
 	void makeEmpty() {
+		count = 0;
 		Node* temporary = new Node();
 		while (first != NULL) {
 			temporary = first;
 			first = first->next;
 			delete temporary;
 		}
+		first = new Node(NULL, first);
 	}
 };
 int main()
@@ -174,20 +176,12 @@ int main()
 			int del_num;
 			cin >> del_num;
 			A.deleteItem(del_num);
+			A.printList();
 			break;
 		case 4:
 			A.makeEmpty();
 			cout << "\nThe List has been got rid of all items\n";
-			int num;
-			cin >> num;
-			while (num != 67)
-			{
-				A.searchForItem(num);
-				cin >> num;
-			}
-
 			break;
-
 		}
 	}
 	
