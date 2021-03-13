@@ -74,6 +74,7 @@ public:
 			cout << i->data << " ";
 			i = i->next;
 		}
+		cout << "\n\n";
 	}
 	bool searchForItem(int item) {
 		bool found = false;
@@ -155,38 +156,37 @@ int main()
 			int item;
 			cin >> item;
 			A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
+		}		
+		cout << "\n\n" << size << "- List is Full!!";
+		while (true) {
+			cout << "\nChoose the operations among ones mentioned below:\n";
+			int operation;
+			cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)\n4- making the List empty\n";
+			cin >> operation;
+			switch (operation) {
+				case 1:
+					A.printList();
+					break;
+				case 2:
+					cout << "\nInput the item that you want to search for:\n";
+					int s;
+					cin >> s;
+					A.searchForItem(s);
+					break;
+				case 3:
+					cout << "\nInput the item that you want to delete with all repetitions:\n";
+					int del_num;
+					cin >> del_num;
+					A.deleteItem(del_num);
+					A.printList();
+					break;
+				case 4:
+					A.makeEmpty();
+					cout << "\nThe List has been got rid of all items\n";
+					break;
+			}
 		}
-		cout << "\n\n" << size << "- List is Full!! Choose the operations among ones mentioned below:\n";
-		int operation;
-		cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)\n";
-		cin >> operation;
-		//first version of operations
-		switch (operation) {
-		case 1:
-			A.printList();
-			break;
-		case 2:
-			cout << "\nInput the item that you want to search for:\n";
-			int s;
-			cin >> s;
-			A.searchForItem(s);
-			break;
-		case 3:
-			cout << "\nInput the item that you want to delete with all repetitions:\n";
-			int del_num;
-			cin >> del_num;
-			A.deleteItem(del_num);
-			A.printList();
-			break;
-		case 4:
-			A.makeEmpty();
-			cout << "\nThe List has been got rid of all items\n";
-			break;
-		}
+		
 	}
-	
-	
-	
-	
 	
 }
