@@ -82,8 +82,8 @@ public:
 		while (needed->next != NULL && needed->data != item) {
 			needed = needed->next;
 		}
-		if (needed->next == NULL && needed->data != item) { cout << "\nThe item has not been found\n"; return found; }
-		else { cout << "\nThe item has been found\n"; found = true; return found; }
+		if (needed->next == NULL && needed->data != item) { return found; }
+		else { found = true; return found; }
 
 	}
 	void deleteItem(int item) {
@@ -171,7 +171,12 @@ int main()
 					cout << "\nInput the item that you want to search for:\n";
 					int s;
 					cin >> s;
-					A.searchForItem(s);
+					if (A.searchForItem(s)) {
+						cout << "\nThe item has been found\n";
+					}
+					else {
+						cout << "\nThe item has not been found\n";
+					}
 					break;
 				case 3:
 					cout << "\nInput the item that you want to delete with all repetitions:\n";
