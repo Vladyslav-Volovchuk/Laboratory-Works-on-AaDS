@@ -90,16 +90,27 @@ public:
 		while(searchForItem(item)){
 			Node* needed = first;
 			Node* previous = NULL;
-			while (needed->data != item && needed->next != NULL) {
-				previous = needed;
-				needed = needed->next;
+			if (needed->data == item && needed != NULL) {
+				first = first->next;
+				delete needed;
+				count--;
 			}
-			if (needed->data != item && needed->next == NULL) {
-				cout << "Needed item has not been found in the list. Try another operation\n\n\n";
+			else
+			{
+				while (needed->data != item && needed->next != NULL) {
+					previous = needed;
+					needed = needed->next;
+				}
+				if (needed->data != item && needed->next == NULL) {
+					cout << "Needed item has not been found in the list. Try another operation\n\n\n";
+				}
+				else {
+					previous->next = needed->next;
+					delete needed;
+					count--;
+				}
 			}
-			else {
-				previous->next = needed->next;
-			}
+			
 		}
 	}
 	bool isFull(int size) {
@@ -171,19 +182,14 @@ int main()
 					cout << "\nInput the item that you want to search for:\n";
 					int s;
 					cin >> s;
-					if (A.searchForItem(s)) {
-						cout << "\nThe item has been found\n";
-					}
-					else {
-						cout << "\nThe item has not been found\n";
-					}
+					if (A.searchForItem(s)) { cout << "\nThe item has been found\n";}
+					else { cout << "\nThe item has not been found\n";}
 					break;
 				case 3:
 					cout << "\nInput the item that you want to delete with all repetitions:\n";
 					int del_num;
 					cin >> del_num;
 					A.deleteItem(del_num);
-					A.printList();
 					break;
 				case 4:
 					A.makeEmpty();
