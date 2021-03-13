@@ -142,6 +142,14 @@ public:
 		}
 		first = new Node(NULL, first);
 	}
+	int retrieveItem(int item) {
+		if (searchForItem(item)) {
+			return item;
+		}
+		else {
+			return false;
+		}
+	}
 };
 int main()
 {
