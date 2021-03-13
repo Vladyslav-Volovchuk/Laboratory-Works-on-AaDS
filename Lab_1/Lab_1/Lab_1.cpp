@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <conio.h>
 
 using namespace std;
 struct Node {
@@ -131,36 +132,65 @@ public:
 int main()
 {
 	List A;
-	int size;
 	
-	cout << "Enter the size of a list:\n";
-	cin >> size;
-	cout << "\n\nChoose the way of sorting your items:\n\n1 - in ascending order;\n2 - in descending order.\nEnter the number of operation: ";
-	int oper;
-	cin >> oper;
-	cout << "\nBegin inputting the items now:\n";	
-	for (int i = 0; i < size; i++) {
-		int item;
-		cin >> item;
-		A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
+	while (true) {
+		int size;
+		cout << "Enter the size of a list:\n";
+		cin >> size;
+		while (size <= 0) {
+			cout << "\nINVALID DATA !! TRY TO INPUT ANOTHER NUMBER:\n";
+			cin >> size;
+		}		
+		cout << "\n\nChoose the way of sorting your items:\n\n1 - in ascending order;\n2 - in descending order.\nEnter the number of operation: ";
+		int oper;
+		cin >> oper;
+		while (oper != 1 && oper != 2) {
+			cout << "\nINVALID DATA !! ENTER 1 OR 2 TO CHOOSE THE WAY OF SORTING !\n";
+			cin >> oper;
+		}
+		cout << "\nBegin inputting the items now:\n";
+		for (int i = 0; i < size; i++) {
+			int item;
+			cin >> item;
+			A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
+		}
+		cout << "\n\n" << size << "- List is Full!! Choose the operations among ones mentioned below:\n";
+		int operation;
+		cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)\n";
+		cin >> operation;
+		//first version of operations
+		switch (operation) {
+		case 1:
+			A.printList();
+			break;
+		case 2:
+			cout << "\nInput the item that you want to search for:\n";
+			int s;
+			cin >> s;
+			A.searchForItem(s);
+			break;
+		case 3:
+			cout << "\nInput the item that you want to delete with all repetitions:\n";
+			int del_num;
+			cin >> del_num;
+			A.deleteItem(del_num);
+			break;
+		case 4:
+			A.makeEmpty();
+			cout << "\nThe List has been got rid of all items\n";
+			int num;
+			cin >> num;
+			while (num != 67)
+			{
+				A.searchForItem(num);
+				cin >> num;
+			}
+
+			break;
+
+		}
 	}
-	cout << "\n\n" << size << "- List is Full!! Choose the operations among ones mentioned below:\n";
-	int operation;
-	cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)\n";
-	cin >> operation;
-	//first version of operations
-	switch (operation) {
-	case 1:
-		A.printList();
-		break;
-	case 2:
-		cout << "\nInput the item that you want to search for:\n";
-		int s;
-		cin >> s;
-		A.searchForItem(s);
-		break;
-		//case
-	}
+	
 	
 	
 	
