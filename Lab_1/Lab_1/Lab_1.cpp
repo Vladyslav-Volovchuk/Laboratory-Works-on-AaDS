@@ -144,7 +144,6 @@ public:
 			first = first->next;
 			delete temporary;
 		}
-		first = new Node(NULL, first);
 	}
 	int retrieveItem(int item) {
 		if (searchForItem(item)) {
