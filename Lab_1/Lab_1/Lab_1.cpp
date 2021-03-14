@@ -79,6 +79,9 @@ public:
 	bool searchForItem(int item) {
 		bool found = false;
 		Node* needed = first;
+		if (needed == NULL) {
+			return found;
+		}
 		while (needed->next != NULL && needed->data != item) {
 			needed = needed->next;
 		}
@@ -89,14 +92,15 @@ public:
 	void deleteItem(int item) {
 		while(searchForItem(item)){
 			Node* needed = first;
-			Node* previous = NULL;
+			
 			if (needed->data == item && needed != NULL) {
 				first = first->next;
 				delete needed;
 				count--;
 			}
 			else
-			{
+			{ 
+				Node* previous = NULL;
 				while (needed->data != item && needed->next != NULL) {
 					previous = needed;
 					needed = needed->next;
@@ -198,6 +202,7 @@ int main()
 					int del_num;
 					cin >> del_num;
 					A.deleteItem(del_num);
+					A.printList();
 					break;
 				case 4:
 					A.makeEmpty();
