@@ -118,14 +118,14 @@ public:
 		}
 	}
 	bool isFull(int size) {
-		int result = 1;
+		//int result = 1;
 		bool res = true;
-		Node* firstNode = first;
-		while (result < size) {
+		/*Node* firstNode = first;
+		while (result != size || firstNode != NULL) {
 			firstNode = firstNode->next;
 			result++;
-		}
-		if (result == size) { cout << result << " - List is full!!\n" << endl; return res; }
+		}*/
+		if (count == size) {  return res; }//result
 		else { res = false; return res; }
 	}
 	bool isEmpty() {
@@ -179,38 +179,49 @@ int main()
 			int item;
 			cin >> item;
 			A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
-		}		
+		}
 		cout << "\n\n" << size << "- List is Full!!";
 		while (true) {
 			cout << "\nChoose the operations among ones mentioned below:\n";
 			int operation;
-			cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)\n4- making the List empty\n";
+			cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)";
+			cout << "\n4 - making the List empty\n5 - adding a new item to the list\n";
 			cin >> operation;
 			switch (operation) {
-				case 1:
-					A.printList();
-					break;
-				case 2:
-					cout << "\nInput the item that you want to search for:\n";
-					int s;
-					cin >> s;
-					if (A.searchForItem(s)) { cout << "\nThe item has been found\n";}
-					else { cout << "\nThe item has not been found\n";}
-					break;
-				case 3:
-					cout << "\nInput the item that you want to delete with all repetitions:\n";
-					int del_num;
-					cin >> del_num;
-					A.deleteItem(del_num);
-					A.printList();
-					break;
-				case 4:
-					A.makeEmpty();
-					cout << "\nThe List has been got rid of all items\n";
-					break;
+			case 1:
+				A.printList();
+				break;
+			case 2:
+				cout << "\nInput the item that you want to search for:\n";
+				int s;
+				cin >> s;
+				if (A.searchForItem(s)) { cout << "\nThe item has been found\n"; }
+				else { cout << "\nThe item has not been found\n"; }
+				break;
+			case 3:
+				cout << "\nInput the item that you want to delete with all repetitions:\n";
+				int del_num;
+				cin >> del_num;
+				A.deleteItem(del_num);
+				A.printList();
+				break;
+			case 4:
+				A.makeEmpty();
+				cout << "\nThe List has been got rid of all items\n";
+				break;
+			case 5:
+				int item;
+				cout << "\nInput the item that you want to add to the List:\n";
+				cin >> item;
+				if (A.isFull(size) == false) {
+					A.chooseSorting(item, oper);
+				}
+				else {
+					cout << size << " - List is full!!\n" << endl;
+				}
+
 			}
 		}
-		
+
 	}
-	
 }
