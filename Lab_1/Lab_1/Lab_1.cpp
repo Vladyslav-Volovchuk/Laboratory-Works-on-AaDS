@@ -136,10 +136,9 @@ public:
 	bool isEmpty() {
 		bool result = true;
 		if (count == 0) {
-			cout << "\nList is empty!\n";
-			return result;
+			return result;		
 		}
-		else { cout << "\nList is not empty!\n"; result = false; return result; }
+		else {result = false; return result; }
 	}
 
 	void makeEmpty() {
@@ -185,11 +184,11 @@ public:
 int main()
 {
 	List A;
-	List B;
 	while (true) {
 		int size;
 		cout << "Enter the size of a list:\n";
 		cin >> size;
+		while (size <= 0) {
 			cout << "\nINVALID DATA !!\nYOU WILL NOT BE ABLE TO INPUT NUMBERS !!\nTRY TO INPUT ANOTHER NUMBER:\n";
 			cin >> size;
 		}		
@@ -218,11 +217,17 @@ int main()
 				A.printList(&A);
 				break;
 			case 2:
-				cout << "\nInput the item that you want to search for:\n";
+				if (A.isEmpty()) {
+					cout << "\nList is empty!\n";
+					break;
+				}	
+				else {
+					cout << "\nInput the item that you want to search for:\n";
 				int s;
 				cin >> s;
-				if (A.searchForItem(s)) { cout << "\nThe item has been found\n"; }
-				else { cout << "\nThe item has not been found\n"; }
+					if (A.searchForItem(s)) { cout << "\nThe item has been found\n"; }
+					else { cout << "\nThe item has not been found\n"; }
+				}	
 				break;
 			case 3:
 				cout << "\nInput the item that you want to delete with all repetitions:\n";
