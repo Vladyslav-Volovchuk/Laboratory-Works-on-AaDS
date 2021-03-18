@@ -67,6 +67,7 @@ public:
 			previous->next = new Node(item, following);
 		count++;
 	}
+
 	void printList() {//the operation of printing the whole list sorted
 		cout << "\n\nThe content of the List is:\n";
 		Node* i = first;
@@ -76,6 +77,7 @@ public:
 		}
 		cout << "\n\n";
 	}
+
 	bool searchForItem(int item) {
 		bool found = false;
 		Node* needed = first;
@@ -89,6 +91,7 @@ public:
 		else { found = true; return found; }
 
 	}
+
 	void deleteItem(int item) {
 		while(searchForItem(item)){
 			Node* needed = first;
@@ -117,6 +120,7 @@ public:
 			
 		}
 	}
+
 	bool isFull(int size) {
 		//int result = 1;
 		bool res = true;
@@ -128,6 +132,7 @@ public:
 		if (count == size) {  return res; }//result
 		else { res = false; return res; }
 	}
+
 	bool isEmpty() {
 		bool result = true;
 		if (count == 0) {
@@ -136,6 +141,7 @@ public:
 		}
 		else { cout << "\nList is not empty!\n"; result = false; return result; }
 	}
+
 	void makeEmpty() {
 		count = 0;
 		Node* temporary = new Node();
@@ -145,25 +151,27 @@ public:
 			delete temporary;
 		}
 	}
+
 	int retrieveItem(int item) {
 		if (searchForItem(item)) {
 			return item;
 		}
 		else {
-			return false;
+			cout << "\nNothing to retrieve\n";
 		}
 	}
 };
+
+
 int main()
 {
 	List A;
-	
+	List B;
 	while (true) {
 		int size;
 		cout << "Enter the size of a list:\n";
 		cin >> size;
-		while (size <= 0) {
-			cout << "\nINVALID DATA !! TRY TO INPUT ANOTHER NUMBER:\n";
+			cout << "\nINVALID DATA !!\nYOU WILL NOT BE ABLE TO INPUT NUMBERS !!\nTRY TO INPUT ANOTHER NUMBER:\n";
 			cin >> size;
 		}		
 		cout << "\n\nChoose the way of sorting your items:\n\n1 - in ascending order;\n2 - in descending order.\nEnter the number of operation: ";
