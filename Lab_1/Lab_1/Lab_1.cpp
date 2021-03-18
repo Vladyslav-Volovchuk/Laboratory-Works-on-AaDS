@@ -68,9 +68,9 @@ public:
 		count++;
 	}
 
-	void printList() {//the operation of printing the whole list sorted
+	void printList(List* A) {//the operation of printing the whole list sorted
 		cout << "\n\nThe content of the List is:\n";
-		Node* i = first;
+		Node* i = A->first;
 		while (i != NULL) {
 			cout << i->data << " ";
 			i = i->next;
@@ -160,6 +160,25 @@ public:
 			cout << "\nNothing to retrieve\n";
 		}
 	}
+	
+	void reverse_copy(List* A) {
+		List B = List();
+		int count_2 = A->count;
+
+		for (int k = 1; k <= count_2; k++) {
+			Node* head = A->first;
+			if (k == 1) {
+				B.addItem(NULL, head, head->data);
+			}
+			else{
+				for (int j = 1; j < k; j++) {
+					head = head->next;
+				}
+				B.addItem(NULL, head, head->data);
+			}
+		}
+		printList(&B);
+	}
 };
 
 
@@ -192,11 +211,11 @@ int main()
 			cout << "\nChoose the operations among ones mentioned below:\n";
 			int operation;
 			cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)";
-			cout << "\n4 - making the List empty\n5 - adding a new item to the list\n";
+			cout << "\n4 - making the List empty\n5 - adding a new item to the list\n6 - Print the List in reverse order\n";
 			cin >> operation;
 			switch (operation) {
 			case 1:
-				A.printList();
+				A.printList(&A);
 				break;
 			case 2:
 				cout << "\nInput the item that you want to search for:\n";
@@ -210,7 +229,7 @@ int main()
 				int del_num;
 				cin >> del_num;
 				A.deleteItem(del_num);
-				A.printList();
+				A.printList(&A);
 				break;
 			case 4:
 				A.makeEmpty();
@@ -226,7 +245,8 @@ int main()
 				else {
 					cout << size << " - List is full!!\n" << endl;
 				}
-
+			case 6:
+				A.reverse_copy(&A);
 			}
 		}
 
