@@ -2,28 +2,30 @@
 //
 
 #include <iostream>
-#include <conio.h>
-
+#include <string>
 using namespace std;
+
+template<typename T>
 struct Node {
-	int data;
-	Node* next;
+	T data;
+	Node<T>* next;
 	Node() {
 		next = NULL;
 	}
-	Node(int x, Node* link = NULL) {
+	Node(T x, Node* link = NULL) {
 		data = x;
 		next = link;
 	}
 };
+template<typename T>
 class List {
 private:
-	Node* first;
+	Node<T>* first;
 	int count;
 public:
 	List() { first = NULL; count = 0; }
 	~List() {
-		Node* temporary = new Node();
+		Node<T>* temporary = new Node<T>();
 		while (first != NULL) {
 			temporary = first;
 			first = first->next;
@@ -31,7 +33,7 @@ public:
 		}
 		delete first;
 	}
-	void chooseSorting(int item, int oper) {
+	void sortingThenAdding(T item, int oper) {
 		switch (oper) {
 		case 1:
 			ascendingOrd(item);
@@ -41,36 +43,36 @@ public:
 			break;
 		}
 	}
-	void ascendingOrd(int item) {
-		Node* following = first;
-		Node* previous = NULL;
+	void ascendingOrd(T item) {
+		Node<T>* following = first;
+		Node<T>* previous = NULL;
 		while (following != NULL && following->data <= item) {
 			previous = following;
 			following = following->next;
 		}
 		addItem(previous, following, item);//method of adding item to the list
 	}
-	void descendingOrd(int item) {
-		Node* following = first;
-		Node* previous = NULL;
+	void descendingOrd(T item) {
+		Node<T>* following = first;
+		Node<T>* previous = NULL;
 		while (following != NULL && following->data > item) {
 			previous = following;
 			following = following->next;
 		}
 		addItem(previous, following, item);//method of adding item to the list
 	}
-	void addItem(Node* previous, Node* following, int item) {//adding item after defined method of sorting
+	void addItem(Node<T>* previous, Node<T>* following, T item) {//adding item after defined method of sorting
 		if (previous == NULL) {
-			first = new Node(item, first);
+			first = new Node<T>(item, first);
 		}
 		else
-			previous->next = new Node(item, following);
+			previous->next = new Node<T>(item, following);
 		count++;
 	}
 
 	void printList(List* A) {//the operation of printing the whole list sorted
 		cout << "\n\nThe content of the List is:\n";
-		Node* i = A->first;
+		Node<T>* i = A->first;
 		while (i != NULL) {
 			cout << i->data << " ";
 			i = i->next;
@@ -78,9 +80,9 @@ public:
 		cout << "\n\n";
 	}
 
-	bool searchForItem(int item) {
+	bool searchForItem(T item) {
 		bool found = false;
-		Node* needed = first;
+		Node<T>* needed = first;
 		if (needed == NULL) {
 			return found;
 		}
@@ -92,9 +94,9 @@ public:
 
 	}
 
-	void deleteItem(int item) {
+	void deleteItem(T item) {
 		while(searchForItem(item)){
-			Node* needed = first;
+			Node<T>* needed = first;
 			
 			if (needed->data == item && needed != NULL) {
 				first = first->next;
@@ -103,7 +105,7 @@ public:
 			}
 			else
 			{ 
-				Node* previous = NULL;
+				Node<T>* previous = NULL;
 				while (needed->data != item && needed->next != NULL) {
 					previous = needed;
 					needed = needed->next;
@@ -122,13 +124,7 @@ public:
 	}
 
 	bool isFull(int size) {
-		//int result = 1;
 		bool res = true;
-		/*Node* firstNode = first;
-		while (result != size || firstNode != NULL) {
-			firstNode = firstNode->next;
-			result++;
-		}*/
 		if (count == size) {  return res; }//result
 		else { res = false; return res; }
 	}
@@ -143,7 +139,7 @@ public:
 
 	void makeEmpty() {
 		count = 0;
-		Node* temporary = new Node();
+		Node<T>* temporary = new Node<T>();
 		while (first != NULL) {
 			temporary = first;
 			first = first->next;
@@ -151,7 +147,7 @@ public:
 		}
 	}
 
-	int retrieveItem(int item) {
+	int retrieveItem(T item) {
 		if (searchForItem(item)) {
 			return item;
 		}
@@ -161,11 +157,11 @@ public:
 	}
 	
 	void reverse_copy(List* A) {
-		List B = List();
+		List<T> B = List<T>();
 		int count_2 = A->count;
 
 		for (int k = 1; k <= count_2; k++) {
-			Node* head = A->first;
+			Node<T>* head = A->first;
 			if (k == 1) {
 				B.addItem(NULL, head, head->data);
 			}
@@ -183,7 +179,7 @@ public:
 
 int main()
 {
-	List A;
+	List<string> A;
 	while (true) {
 		int size;
 		cout << "Enter the size of a list:\n";
@@ -201,17 +197,21 @@ int main()
 		}
 		cout << "\nBegin inputting the items now:\n";
 		for (int i = 0; i < size; i++) {
-			int item;
+			string item;
 			cin >> item;
-			A.chooseSorting(item, oper);//sorting item by the number of operation snd adding to the List;	
+			A.sortingThenAdding(item, oper);//sorting item by the number of operation snd adding to the List;	
 		}
 		cout << "\n\n" << size << "- List is Full!!";
+
+		//operations with the List
 		while (true) {
 			cout << "\nChoose the operations among ones mentioned below:\n";
 			int operation;
 			cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)";
 			cout << "\n4 - making the List empty\n5 - adding a new item to the list\n6 - Print the List in reverse order\n";
 			cin >> operation;
+			string del_num;
+			string item;
 			switch (operation) {
 			case 1:
 				A.printList(&A);
@@ -223,7 +223,7 @@ int main()
 				}	
 				else {
 					cout << "\nInput the item that you want to search for:\n";
-				int s;
+				string s;
 				cin >> s;
 					if (A.searchForItem(s)) { cout << "\nThe item has been found\n"; }
 					else { cout << "\nThe item has not been found\n"; }
@@ -231,7 +231,7 @@ int main()
 				break;
 			case 3:
 				cout << "\nInput the item that you want to delete with all repetitions:\n";
-				int del_num;
+				
 				cin >> del_num;
 				A.deleteItem(del_num);
 				A.printList(&A);
@@ -241,11 +241,11 @@ int main()
 				cout << "\nThe List has been got rid of all items\n";
 				break;
 			case 5:
-				int item;
+				
 				cout << "\nInput the item that you want to add to the List:\n";
 				cin >> item;
 				if (A.isFull(size) == false) {
-					A.chooseSorting(item, oper);
+					A.sortingThenAdding(item, oper);
 				}
 				else {
 					cout << size << " - List is full!!\n" << endl;
