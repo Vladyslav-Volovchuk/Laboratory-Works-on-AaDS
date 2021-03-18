@@ -179,15 +179,20 @@ public:
 
 int main()
 {
-	List<string> A;
+	List<int> A;
+	List<string> B;
+
 	while (true) {
+		//размер списка
 		int size;
 		cout << "Enter the size of a list:\n";
 		cin >> size;
 		while (size <= 0) {
 			cout << "\nINVALID DATA !!\nYOU WILL NOT BE ABLE TO INPUT NUMBERS !!\nTRY TO INPUT ANOTHER NUMBER:\n";
 			cin >> size;
-		}		
+		}	
+
+		//выбор сортировки
 		cout << "\n\nChoose the way of sorting your items:\n\n1 - in ascending order;\n2 - in descending order.\nEnter the number of operation: ";
 		int oper;
 		cin >> oper;
@@ -195,63 +200,75 @@ int main()
 			cout << "\nINVALID DATA !! ENTER 1 OR 2 TO CHOOSE THE WAY OF SORTING !\n";
 			cin >> oper;
 		}
+
+		//вставка элементов
 		cout << "\nBegin inputting the items now:\n";
 		for (int i = 0; i < size; i++) {
-			string item;
+			int item;
+			//string item;
 			cin >> item;
-			A.sortingThenAdding(item, oper);//sorting item by the number of operation snd adding to the List;	
+			A.sortingThenAdding(item, oper);
+			//B.sortingThenAdding(item, oper);
+			
 		}
 		cout << "\n\n" << size << "- List is Full!!";
 
 		//operations with the List
+
+		int add, del;
+		//string add, del;
 		while (true) {
 			cout << "\nChoose the operations among ones mentioned below:\n";
 			int operation;
 			cout << "1 - Printing the List;\n2 - Searching for an item;\n3 - Deleting the item(all items with the same value will  be removed !!)";
 			cout << "\n4 - making the List empty\n5 - adding a new item to the list\n6 - Print the List in reverse order\n";
 			cin >> operation;
-			string del_num;
-			string item;
-			switch (operation) {
-			case 1:
+			switch(operation) {
+			case 1://printing
 				A.printList(&A);
+				//B.printList(&B);
 				break;
-			case 2:
-				if (A.isEmpty()) {
+			case 2://searching
+				if (A.isEmpty()) {//B
 					cout << "\nList is empty!\n";
 					break;
 				}	
 				else {
 					cout << "\nInput the item that you want to search for:\n";
-				string s;
-				cin >> s;
-					if (A.searchForItem(s)) { cout << "\nThe item has been found\n"; }
-					else { cout << "\nThe item has not been found\n"; }
+					int s;
+					//string s;
+					cin >> s;
+						if (A.searchForItem(s)) {//B
+							cout << "\nThe item has been found\n"; 
+						}
+						else { cout << "\nThe item has not been found\n"; }
 				}	
 				break;
-			case 3:
+			case 3://deleting
 				cout << "\nInput the item that you want to delete with all repetitions:\n";
-				
-				cin >> del_num;
-				A.deleteItem(del_num);
+				cin >> del;
+				A.deleteItem(del);
+				//B.deleteItem(del);
 				A.printList(&A);
+				//B.printList(&B);
 				break;
-			case 4:
+			case 4://making empty
 				A.makeEmpty();
+				//B.makeEmpty();
 				cout << "\nThe List has been got rid of all items\n";
 				break;
-			case 5:
-				
-				cout << "\nInput the item that you want to add to the List:\n";
-				cin >> item;
-				if (A.isFull(size) == false) {
-					A.sortingThenAdding(item, oper);
-				}
-				else {
+			case 5://adding item
+				if (A.isFull(size) == true) {//B
 					cout << size << " - List is full!!\n" << endl;
+				}			
+				else {
+					cout << "\nInput the item that you want to add to the List:\n";
+					cin >> add;
+					A.sortingThenAdding(add, oper);//B
 				}
-			case 6:
+			case 6://reversing
 				A.reverse_copy(&A);
+				//B.reverse_copy(&B);
 			}
 		}
 
